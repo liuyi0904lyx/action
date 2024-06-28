@@ -11,7 +11,7 @@ jobs:
     - name: Clone source code
       run: |
         git clone https://github.com/liuyi0904lyx/action.git openwrtmtt
-        git clone https://github.com/padavanonly/immortalwrt.gitopenwrtmt
+        git clone https://github.com/padavanonly/immortalwrt.git openwrtmt
         cd openwrtmt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
