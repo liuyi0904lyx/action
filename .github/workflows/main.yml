@@ -11,18 +11,12 @@ jobs:
     - name: Clone source code
       run: |
         git clone https://github.com/liuyi0904lyx/action.git openwrtmtt
-        git clone -b openwrt-21.02 https://git.openwrt.org/openwrt/openwrt.git
+        git clone -b mt7981 https://github.com/padavanonly/immortalwrtARM.git openwrtmt
         cd openwrtmt
-        echo "src-git mtk_openwrt_feed https://git01.mediatek.com/openwrt/feeds/mtk-openwrt-feeds" >>
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         cd $GITHUB_WORKSPACE/openwrtmtt
         cp .config $GITHUB_WORKSPACE/openwrtmt
-        cp -af ./feeds/mtk_openwrt_feed/21.02/files/* .
-cp -af ./feeds/mtk_openwrt_feed/tools .
-for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-base -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
-for file in $(find ./feeds/mtk_openwrt_feed/21.02/patches-feeds -name "*.patch" | sort); do patch -f -p1 -i ${file}; done
-
     - name: Download package
       run: |
         cd openwrtmt && make download -j8
